@@ -1,0 +1,82 @@
+﻿
+
+@model ViewModel
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+
+<head>
+
+
+    <title>Acortador de Enlaces Gratis y Rápido | DocsantLink</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="description" content="Acorta tus enlaces de forma rápida, segura y gratuita. Personaliza tus URLs y mejora tu presencia online con nuestro acortador de links fácil de usar.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Acorta tus enlaces en segundos">
+    <meta property="og:description" content="Rápido, seguro y gratis. Personaliza tus links.">
+    <meta property="og:image" content="https://docsantlink.somee.com/Preview.jpg">
+    <meta property="og:url" content="https://docsantlink.somee.com/">
+
+</head>
+<h1>Acorta tu URL </h1>
+
+
+<main class="create-Container">
+        <form asp-action="Create" method="post" class="form-Container">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label name="Name" asp-for="NuevaUrl.Name" class="control-label">Nombre</label>
+            <input name="NuevaUrl.Name" placeholder="Hash" class="form-control input-text" />
+
+            </div>
+        <div class="form-group ">
+            <label name="Url" asp-for="NuevaUrl.Url" class="control-label">URL</label>
+            <input type="url" name="NuevaUrl.Url" placeholder="https://WWW.LINKSUPERLAR..." class="form-control input-text" />
+
+            </div>
+            <div class="form-group form-item">
+                <input type="submit" value="Acortar URL" class="btn btn-primary main-btn" />
+            </div>
+        </form>
+   
+
+</main>
+
+<section class="error-container">
+    <span asp-validation-for="NuevaUrl.Name" class="warning-text error-span"></span>
+    <span asp-validation-for="NuevaUrl.Url" class="warning-text error-span"></span>
+</section>
+
+<section>
+    <table class="table">
+        <h2 class="subtitle">Links Registrados</h2>
+
+        <thead>
+            <tr>
+                <th>
+                    URL Acortada
+                </th>
+                <th>
+                    URL Completa
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListaUrls)
+            {
+                <tr>
+                    <td>
+                        <a class="url-title" href=@Html.DisplayFor(modelItem => item.Url)> @Model.DomainName/@Html.DisplayFor(modelItem => item.Name)  </a>
+                    </td>
+                    <td class="text-muted">
+                        @Html.DisplayFor(modelItem => item.Url)
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

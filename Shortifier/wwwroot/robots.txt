@@ -1,0 +1,6 @@
+﻿User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /scripts/
+Allow: /
+Sitemap: https://docsant.link/sitemap.xml
