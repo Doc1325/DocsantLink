@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+*.robots.txt
+*.Preview.jpg
+*.sitemap.xml
+
 # User-specific files
 *.rsuser
 *.suo
@@ -361,3 +365,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Shortifier/wwwroot/favicon.ico
+/Shortifier/wwwroot/Preview.jpg
+/Shortifier/wwwroot/robots.txt
+/Shortifier/wwwroot/sitemap.xml
+/Shortifier/robots.txt
