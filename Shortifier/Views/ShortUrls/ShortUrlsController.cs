@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,8 +30,10 @@ namespace WebApplication2.Views.Home
             {
                 ListaUrls = await _urlsService.GetAllUrls(),
                 NuevaUrl = new ShortUrl(),
-                DomainName = _configuration["DomainName"]
+                DomainName = _configuration["DomainName"],
+                Ramdom = false
             };
+
 
             return View("Index", modelo);
         }
@@ -45,9 +48,9 @@ namespace WebApplication2.Views.Home
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ViewModel model)
         {
-           
 
-            model.ListaUrls = await _urlsService.GetAllUrls(); 
+
+            model.ListaUrls = await _urlsService.GetAllUrls();
 
             if (_urlsService.IsValidUrl(model.NuevaUrl.Url) == false)
             {
@@ -59,7 +62,33 @@ namespace WebApplication2.Views.Home
 
             }
 
-            if(String.Equals( model.NuevaUrl.Name, "NotFound", StringComparison.OrdinalIgnoreCase))
+            if (model.Ramdom == true) {
+
+
+
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                int length = 4;
+
+                do
+                {
+
+                    var stringChars = new char[length];
+                    var random = new Random();
+
+                    for (int i = 0; i < stringChars.Length; i++)
+                    {
+                        stringChars[i] = chars[random.Next(chars.Length)];
+                    }
+                    var finalString = new String(stringChars);
+
+                    model.NuevaUrl.Name = finalString;
+                    length++;
+                        } while ((model.ListaUrls.Any(s => String.Equals(s.Name, model.NuevaUrl.Name, StringComparison.OrdinalIgnoreCase))));
+
+            }
+
+
+            if (String.Equals(model.NuevaUrl.Name, "NotFound", StringComparison.OrdinalIgnoreCase))
             {
 
                 ModelState.AddModelError("NuevaUrl.Name", "Lo siento, este hash es invalido.");
@@ -68,6 +97,9 @@ namespace WebApplication2.Views.Home
 
             }
 
+
+
+
             if (model.NuevaUrl.Name.IsNullOrEmpty())
             {
                 ModelState.AddModelError("NuevaUrl.Name", "El campo nombre no puede estar vacio");
@@ -75,15 +107,24 @@ namespace WebApplication2.Views.Home
 
                 return View("Index", model);
             }
-            if (model.ListaUrls.Any(s => String.Equals(s.Name, model.NuevaUrl.Name, StringComparison.OrdinalIgnoreCase) ))
+
+            if (model.NuevaUrl.Url.IsNullOrEmpty())
+            {
+                ModelState.AddModelError("NuevaUrl.Url", "El campo URL no puede estar vacio");
+                model.DomainName = _configuration["DomainName"];
+
+                return View("Index", model);
+            }
+
+            if (model.ListaUrls.Any(s => String.Equals(s.Name, model.NuevaUrl.Name, StringComparison.OrdinalIgnoreCase)))
             {
                 ModelState.AddModelError("NuevaUrl.Name", "Este nombre ya está registrado.");
                 model.DomainName = _configuration["DomainName"];
-               
-                return View("Index", model); 
+
+                return View("Index", model);
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid || model.Ramdom == true)
             {
                 
                  await _urlsService.ShortUrl(model.NuevaUrl);
@@ -92,10 +133,14 @@ namespace WebApplication2.Views.Home
 
             }
 
+
             return NoContent();
 
            
         }
+
+
+
  
 
    

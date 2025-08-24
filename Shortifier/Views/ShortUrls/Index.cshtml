@@ -24,6 +24,29 @@
 <h1>Acorta tu URL </h1>
 
 
+
+
+@functions {
+    public void GenerateRamdom(){
+
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var stringChars = new char[4];
+        var random = new Random();
+
+        for (int i = 0; i < stringChars.Length; i++)
+        {
+            stringChars[i] = chars[random.Next(chars.Length)];
+        }
+        var finalString = new String(stringChars);
+
+       
+        Model.NuevaUrl.Name = finalString;
+
+     }
+  }
+
+
+
 <main class="create-Container">
         <form asp-action="Create" method="post" class="form-Container">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -37,8 +60,14 @@
             <input type="url" name="NuevaUrl.Url" placeholder="https://WWW.LINKSUPERLAR..." class="form-control input-text" />
 
             </div>
+
+        <div class="form-group ">
+            <label name="Ramdom" for="Ramdom" class="control-label">Generar aleatoriamente</label>
+            <input type="checkbox" asp-for="Ramdom" name="Ramdom" />
+        </div>
             <div class="form-group form-item">
                 <input type="submit" value="Acortar URL" class="btn btn-primary main-btn" />
+
             </div>
         </form>
    

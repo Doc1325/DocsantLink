@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using System;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using Shortifier.Services;
 using WebApplication2.Data;
@@ -7,7 +9,7 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Services
 {
-    public class UrlsService: IUrlsService
+    public class UrlsService : IUrlsService
     {
         private readonly ShortDBContext _context;
         public List<String> ErrorList { get; }
@@ -47,12 +49,12 @@ namespace WebApplication2.Services
 
         public async Task<string> GetUrl(string hash)
         {
-            
+
             var LinksList = await _context.ShortUrl.ToListAsync();
-             
-             String? LinkToRedirect =  LinksList.Where(l => String.Equals(l.Name, hash, StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Url;
-               
-            
+
+            String? LinkToRedirect = LinksList.Where(l => String.Equals(l.Name, hash, StringComparison.OrdinalIgnoreCase)).FirstOrDefault()?.Url;
+
+
             return LinkToRedirect;
         }
         public async Task<IEnumerable<ShortUrl>> GetAllUrls()
@@ -66,12 +68,22 @@ namespace WebApplication2.Services
 
         public async Task ShortUrl(ShortUrl newShort)
         {
-             newShort.Name = newShort.Name.Trim().Replace(" ", "-");
+            newShort.Name = newShort.Name.Trim().Replace(" ", "-");
             _context.ShortUrl.Add(newShort);
             await _context.SaveChangesAsync();
-           
+
 
         }
+
+        public async Task RamdomShortUrl(ShortUrl newShort)
+        {
+            newShort.Name = newShort.Name.Trim().Replace(" ", "-");
+            _context.ShortUrl.Add(newShort);
+            await _context.SaveChangesAsync();
+
+
+        }
+
 
        
     }
