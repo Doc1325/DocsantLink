@@ -1,0 +1,52 @@
+[33mcommit de39a7d5c1dacceec4a9542d01a710aa41d863f0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;33mtag: [m[1;33mv1[m[33m)[m
+Author: Docsant <vampiroazul1315@gmail.com>
+Date:   Sun Aug 24 15:25:30 2025 -0400
+
+    Add Ramdom button
+
+[33mcommit 64ba3d0c5e954d88817c810374c8dbe39dcd70aa[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Docsant <vampiroazul1315@gmail.com>
+Date:   Tue May 20 23:09:46 2025 -0400
+
+    Fix in setting files
+
+[33mcommit b3e80a9e16e64fdeaefdb15d9e0b86233135560a[m
+Merge: 0574acb ec29ad1
+Author: Docsant <vampiroazul1315@gmail.com>
+Date:   Tue May 20 23:07:27 2025 -0400
+
+    Merge branch 'main' of https://github.com/Doc1325/DocsantLink
+     sync local an remote branches
+
+[33mcommit 0574acb42cfa5903e02223b0d3a5845bf93f0246[m
+Author: Docsant <vampiroazul1315@gmail.com>
+Date:   Tue May 20 22:59:40 2025 -0400
+
+    rename of main
+
+[33mcommit ec29ad15b9dd3c8e19d7f4ff915346ab783e2cde[m
+Merge: d79946f cb81223
+Author: Dominic Santiago <57734968+Doc1325@users.noreply.github.com>
+Date:   Tue May 20 22:58:28 2025 -0400
+
+    Merge pull request #1 from Doc1325/master
+    
+    Set up for github
+
+[33mcommit cb81223a5069efb6a957864b5dd5ea15c2a97d84[m
+Author: Docsant <vampiroazul1315@gmail.com>
+Date:   Tue May 20 22:56:03 2025 -0400
+
+    Set up for github
+
+[33mcommit d79946ff7435da8a41de7f9b4c95c041ab09742e[m
+Author: Docsant <vampiroazul1315@gmail.com>
+Date:   Tue May 20 22:36:47 2025 -0400
+
+    Add project files.
+
+[33mcommit f5989233a3c63b8ed25a7a5cc0f09e07439ff7ee[m
+Author: Docsant <vampiroazul1315@gmail.com>
+Date:   Tue May 20 22:34:30 2025 -0400
+
+    Add .gitattributes and .gitignore.

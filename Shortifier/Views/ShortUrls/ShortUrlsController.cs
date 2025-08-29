@@ -62,6 +62,8 @@ namespace WebApplication2.Views.Home
 
             }
 
+            
+
             if (model.Ramdom == true) {
 
 
@@ -124,12 +126,14 @@ namespace WebApplication2.Views.Home
                 return View("Index", model);
             }
 
+            model.NuevaUrl.PublicLink = model.PublicLink;
             if (ModelState.IsValid || model.Ramdom == true)
             {
-                
-                 await _urlsService.ShortUrl(model.NuevaUrl);
+                model.DomainName = _configuration["DomainName"];
 
-                return RedirectToAction("Index");
+                await _urlsService.ShortUrl(model.NuevaUrl);
+
+                return View("Created", model);
 
             }
 

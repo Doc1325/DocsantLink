@@ -1,0 +1,66 @@
+﻿@model WebApplication2.Models.ViewModel
+
+@{
+    ViewData["Title"] = "Created";
+}
+
+<script >
+    let copyTimeout; // ← Outside the function
+
+    function copy(){
+      const copyText = document.getElementById("shortUrl")
+      const copyBtn = document.getElementById("copyBtn")
+
+      // Clear any existing timeout
+      if (copyTimeout) {
+        clearTimeout(copyTimeout);
+      }
+
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(copyText.value)
+        .then(() => {
+          copyBtn.textContent = "Copiado!"
+          copyTimeout = setTimeout(() => {
+            copyBtn.textContent = "Copiar";
+            copyTimeout = null; // Clean up
+          }, 1000);
+        })
+        .catch(err => {
+          console.error("Copy failed:", err);
+          copyBtn.textContent = "Error";
+          copyTimeout = setTimeout(() => {
+            copyBtn.textContent = "Copiar";
+            copyTimeout = null;
+          }, 1000);
+        });
+    }
+
+</script>
+
+<h1 class="title">Tu enlace ha sido recortado</h1>
+
+<div class="short-card">
+
+   <div class="card-section">
+        <div class="form-group">
+            <label name="NuevaUrl.Name" class="control-label txt-label" >URL ACORTADA</label>
+            <input name="NuevaUrl.Name" readonly value="@Model.DomainName/@Model.NuevaUrl.Name " class="form-control input-text txt-created" id="shortUrl" />
+
+        </div>
+        <div class="form-group ">
+            <label name="Url" asp-for="NuevaUrl.Url" class="control-label txt-label ">URL COMPLETA</label>
+            <input type="url" name="NuevaUrl.Url" readonly value="@Model.NuevaUrl.Url" class="form-control input-text txt-created" />
+
+        </div>
+   </div>
+
+<div class="card-btns">
+        <a asp-action="Index" class="btn btn-primary card-home-btn">Volver al inicio</a>
+    <a  class="btn btn-primary" id="copyBtn" onclick="copy()">Copiar</a>
+
+</div>
+
+</div>
+
+

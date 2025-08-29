@@ -10,5 +10,7 @@ namespace WebApplication2.Models
 
         public bool Ramdom { get; set; }
 
+        public bool PublicLink { get; set; } = false;
+
     }
 }

@@ -13,5 +13,7 @@ namespace WebApplication2.Models
 
         [Required(ErrorMessage = "Debes introducir una URL para tu hash")]
         public string Url { get; set; }
+
+        public bool PublicLink { get; set; } = false;
     }
 }
